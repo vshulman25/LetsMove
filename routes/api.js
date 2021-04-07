@@ -48,14 +48,25 @@ router.get("/api/workouts/range", (req, res) => {
     }
   }]).then(dbWorkout => {
     res.json(dbWorkout);
-    Workout.find({})
-      .then((dbWorkout) => {
-        res.json(dbWorkout)
-      })
+    // Workout.find({})
+    //   .then((dbWorkout) => {
+    //     res.json(dbWorkout)
+    //   })
   })
     .catch(err => {
       res.status(400).json(err);
     });
 });
+
+router.delete("/api/workouts", ({ body }, res) => {
+  Workout.findByIdAndDelete(body.id)
+    .then(() => {
+      res.json(true);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 
 module.exports = router;
