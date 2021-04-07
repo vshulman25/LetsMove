@@ -21,19 +21,19 @@ const workoutSchema = new Schema({
         },
           duration: {
             type: Number,
-            trim: true
+            // trim: true
         },
           weight: {
             type: Number,
-            trim: true
+            // trim: true
         },
           reps: {
             type: Number,
-            trim: true
+            // trim: true
         },
           sets: {
             type: Number,
-            trim: true
+            // trim: true
         },
         }
       ]
