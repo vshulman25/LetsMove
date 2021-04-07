@@ -1,8 +1,9 @@
-const app = require("express").Router();
+const router = require("express").Router();
 const Workout = require("../models/workout.js");
 const { param } = require("./view.js");
 
-app.post("/api/workouts", (req, res) => {
+// new workout
+router.post("/api/workouts/", ({ }, res) => {
   Workout.create({})
     .then((dbWorkout) => {
       res.json(dbWorkout);
@@ -12,7 +13,9 @@ app.post("/api/workouts", (req, res) => {
     });
 });
 
-app.put('/api/workouts/:id', ({ body, params }, res) => {
+
+// new exercise 
+router.put('/api/workouts/:id', ({ body, params }, res) => {
   Workout.findByIdAndUpdate(
     params.id,
     { $push: { exercises: body } },
@@ -27,15 +30,16 @@ app.put('/api/workouts/:id', ({ body, params }, res) => {
     });
 });
 
-// router.get("/api/transaction", (req, res) => {
-//   Transaction.find({})
-//     .sort({ date: -1 })
-//     .then(dbTransaction => {
-//       res.json(dbTransaction);
-//     })
-//     .catch(err => {
-//       res.status(400).json(err);
-//     });
-// });
 
-module.exports = app;
+// previous workouts 
+router.get("/api/workouts/range", (req, res) => {
+  Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+module.exports = router;
